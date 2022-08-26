@@ -1,4 +1,4 @@
-(defproject io.github.jeremylcfr/clj-java-commons "1.0.0-SNAPSHOT"
+(defproject io.github.jeremylcfr/clj-java-commons "1.0.0"
   :description "Various Java interop and coercion shared material"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
