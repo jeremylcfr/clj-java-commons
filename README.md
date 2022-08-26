@@ -6,6 +6,7 @@ These are mostly used for higher level libraries.
 ## Usage
 
 [![Clojars Project](https://img.shields.io/clojars/v/io.github.jeremylcfr/clj-java-commons.svg)](https://clojars.org/io.github.jeremylcfr/clj-java-commons)
+[![cljdoc badge](https://cljdoc.org/badge/io.github.jeremylcfr/clj-java-commons)](https://cljdoc.org/d/io.github.jeremylcfr/clj-java-commons)
 
 ### Project inclusion
 
