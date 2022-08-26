@@ -10,10 +10,19 @@ These are mostly used for higher level libraries.
 Include it in your project :
 
 ```clojure
-[jeremylcfr/clj-java-commons "0.1.0-SNAPSHOT"]
+[jeremylcfr/clj-java-commons "0.1.0"]
 ```
 
-This is not available for download for now, you must install it locally.
+## Testing in a REPL
+
+Just launch 
+
+```clojure
+lein repl
+```
+
+Under the project folder after having cloned it.
+You will be able to test all functions.
 
 ### Preliminary note about naming
 
