@@ -5,12 +5,14 @@ These are mostly used for higher level libraries.
 
 ## Usage
 
+[![Clojars Project](https://img.shields.io/clojars/v/io.github.jeremylcfr/clj-java-commons.svg)](https://clojars.org/io.github.jeremylcfr/clj-java-commons)
+
 ### Project inclusion
 
 Include it in your project :
 
 ```clojure
-[jeremylcfr/clj-java-commons "0.1.0"]
+[io.github.jeremylcfr/clj-java-commons "1.0.0"]
 ```
 
 ## Testing in a REPL
