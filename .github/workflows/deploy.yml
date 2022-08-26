@@ -23,6 +23,6 @@ jobs:
         with:
           lein: 'latest'
       - name: Publish package
-        run: lein deploy github
+        run: lein deploy github-publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
