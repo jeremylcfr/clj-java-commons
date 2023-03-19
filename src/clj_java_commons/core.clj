@@ -79,6 +79,20 @@
    i.e. double[][]"
   (Class/forName "[[D"))
 
+;;==================================================
+;;=======================CHAR=======================
+;;================================================== 
+
+(def char-array-class
+  "Char array class pointer,
+   i.e. char[]"
+   (Class/forName "[C"))
+
+(def cchar-array-class
+  "2D char array class pointer,
+   i.e. char[][]"
+   (Class/forName "[[C"))
+
 ;;////////////////////////////////////////////////////////////////////////////
 ;;============================================================================
 ;;                                  OPERATORS
@@ -168,6 +182,18 @@
   [obj]
   (instance? ddouble-array-class obj))
 
+;;=================Char===============
+
+(defn char-array?
+  "Returns true when input is a char[]"
+  [obj]
+  (instance? char-array-class obj))
+
+(defn cchar-array?
+  "Returns true when input is of type char[][]"
+  [obj]
+  (instance? cchar-array-class obj))
+
 ;;============================================================
 ;;=======================SPECIAL VALUES=======================
 ;;============================================================
@@ -208,6 +234,11 @@
 (defn da=
   "Double arrays equality of content"
   [^doubles a1 ^doubles a2]
+  (Arrays/equals a1 a2))
+
+(defn ca=
+  "Char arrays equality of content"
+  [^chars a1 ^chars a2]
   (Arrays/equals a1 a2))
 
 ;;==================================================
@@ -309,6 +340,18 @@
   (if (double-array? coll)
     coll
     (double-array coll)))
+
+;;=================Char===============
+
+(defn ->char-array
+  "Coerces to char[] but does not
+   build a new instance when input is already
+   as such"
+  ^chars
+  [coll]
+  (if (char-array? coll)
+    coll
+    (char-array coll)))
 
 ;;============================================================
 ;;=======================TWO DIMENSIONS=======================
@@ -419,6 +462,27 @@
     (->> (map ->double-array data)
          (into-array double-array-class))))
 
+;;=================Char===============
+
+(defn cchar-array
+  "Coerces to char[][]. Builds a new instance
+   whatever type input is (especially char[][]).
+   Use ->cchar-array if you wan to favor char[][]"
+  #^"[[C"
+  [data]
+  (->> (map char-array data)
+       (into-array char-array-class)))
+
+(defn ->cchar-array
+  "Coerces to char[][]. Builds a new instance
+   unless input is already of this type"
+  #^"[[C"
+  [data]
+  (if (cchar-array? data)
+    data
+    (->> (map ->char-array data)
+         (into-array char-array-class))))
+
 ;;=====================================================
 ;;=======================CLOJURE=======================
 ;;=====================================================
@@ -445,6 +509,10 @@
   [^doubles obj]
   (vec obj))
 
+(defmethod ->clj char-array-class
+  [^chars obj]
+  (vec obj))
+
 ;;=================2D array===============
 
 (defmethod ->clj bbyte-array-class
@@ -465,6 +533,10 @@
 
 (defmethod ->clj ddouble-array-class
   [#^"[[D" obj]
+  (mapv vec obj))
+
+(defmethod ->clj cchar-array-class
+  [#^"[[C" obj]
   (mapv vec obj))
 
 ;;==================================================
@@ -498,6 +570,11 @@
   [^doubles obj]
   obj)
 
+(defmethod ->java char-array-class
+  ^chars
+  [^chars obj]
+  obj)
+
 ;;=================2D array===============
 
 (defmethod ->java bbyte-array-class
@@ -523,6 +600,11 @@
 (defmethod ->java ddouble-array-class
   #^"[[D"
   [#^"[[D" obj]
+  obj)
+
+(defmethod ->java cchar-array-class
+  #^"[[C"
+  [#^"[[C" obj]
   obj)
 
 ;;====================================================
@@ -551,6 +633,10 @@
   [^doubles obj]
   (Arrays/toString obj))
 
+(defmethod ->string char-array-class
+  [^chars obj]
+  (Arrays/toString obj))
+
 ;;=================2D array===============
 
 ;; Hinting is useless since the Java function itself
@@ -573,6 +659,10 @@
   (Arrays/deepToString obj))
 
 (defmethod ->string ddouble-array-class
+  [obj]
+  (Arrays/deepToString obj))
+
+(defmethod ->string cchar-array-class
   [obj]
   (Arrays/deepToString obj))
 
